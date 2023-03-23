@@ -13,3 +13,9 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Terraform
+**/.terraform/**
+terraform.tfstate
+terraform.tfstate.backup
+terraform/.test-data/TerraformOptions.json
