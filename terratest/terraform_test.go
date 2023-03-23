@@ -20,14 +20,6 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 					TerraformDir: fixtureFolder,
 					TerraformBinary: "terraform",
 					MaxRetries:   3,
-					/*
-					BackendConfig: map[string]interface{}{
-						"storage_account_name": os.Getenv("StorageAccount"),
-						"key":                  os.Getenv("TF_VAR_uuid"),
-						"container_name":       "terratest",
-						"access_key":           os.Getenv("BackendAccessKey"),
-					},
-					*/
 			})
 
 			// Save options for later test stages
@@ -40,7 +32,7 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 	test_structure.RunTestStage(t, "validate", func() {
 			// run validation checks here
 			//terraformOptions := test_structure.LoadTerraformOptions(t, fixtureFolder)
-			//publicIpAddress := terraform.Output(t, terraformOptions, "public_ip_address")
+			module1output := terraform.Output(t, terraformOptions, "module.thing1.someoutput")
 	})
 
 	// When the test is completed, teardown the infrastructure by calling terraform destroy
