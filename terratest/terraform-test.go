@@ -1,3 +1,11 @@
+package test
+import (
+	"testing"
+	"time"
+	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/gruntwork-io/terratest/modules/retry"
+	//"github.com/stretchr/testify/assert"
+)
 func TestTerraformExample(t *testing.T) {
 	// retryable errors in terraform testing. Details on options:
 	// https://github.com/gruntwork-io/terratest/blob/d1db0095a436b62ed92730ac12ec79497b47d2ee/modules/terraform/options.go#L40

@@ -2,10 +2,7 @@ module github.com/bailey-t/terratest-demo
 
 go 1.20
 
-require (
-	github.com/google/uuid v1.3.0
-	github.com/gruntwork-io/terratest v0.41.16
-)
+require github.com/gruntwork-io/terratest v0.41.16
 
 require (
 	cloud.google.com/go v0.105.0 // indirect
@@ -29,6 +26,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/gofuzz v1.1.0 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
 	github.com/googleapis/gnostic v0.4.1 // indirect

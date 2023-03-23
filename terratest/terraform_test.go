@@ -31,8 +31,15 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 
 	test_structure.RunTestStage(t, "validate", func() {
 			// run validation checks here
-			//terraformOptions := test_structure.LoadTerraformOptions(t, fixtureFolder)
-			module1output := terraform.Output(t, terraformOptions, "module.thing1.someoutput")
+			terraformOptions := test_structure.LoadTerraformOptions(t, fixtureFolder)
+			module1output := terraform.Output(t, terraformOptions, "module1")			
+			module2output := terraform.Output(t, terraformOptions, "module2")			
+			if module1output != "foo" {
+			  t.Fatalf("expected output to be %v, but got %v", "foo", module1output)
+			}
+			if module2output != "bar" {
+			  t.Fatalf("expected output to be %v, but got %v", "bar", module2output)
+			}
 	})
 
 	// When the test is completed, teardown the infrastructure by calling terraform destroy
