@@ -1,4 +1,4 @@
-name: Run Azure Login with OpenID Connect
+name: Terratest-demo
 on: [push]
 
 permissions:
@@ -22,3 +22,14 @@ jobs:
           az account show
           az group list
           pwd
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: 1.15
+ 
+    - name: Test
+      run: |
+        pwd
+        ls
+        go test -v ./terratest/...
