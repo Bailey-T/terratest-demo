@@ -11,7 +11,7 @@ import (
 func TestEndToEndDeploymentScenario(t *testing.T) {
 	t.Parallel()
 
-	fixtureFolder := "../terraform/"
+	fixtureFolder := "../terraform/test"
 
 	// Use Terratest to deploy the infrastructure
 	test_structure.RunTestStage(t, "setup", func() {
