@@ -19,3 +19,6 @@
 terraform.tfstate
 terraform.tfstate.backup
 terraform/.test-data/TerraformOptions.json
+
+# Terratest
+**/.test-data/*
