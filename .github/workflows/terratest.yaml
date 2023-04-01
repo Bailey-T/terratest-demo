@@ -1,8 +1,11 @@
 name: Terratest-demo
-on: [push]
+on:
+  pull_request:
+    branches: [ 'main' ]
+    types: [opened, synchronize, reopened, closed]
 
 permissions:
-      id-token: write
+      id-token: write # Needed for ODIC/Identity Federation
       contents: read
       
 jobs: 
@@ -10,30 +13,25 @@ jobs:
     runs-on: ubuntu-latest
     environment: azure-lab 
     steps:
-    - name: 'Az CLI login'
+    - name: 'Az login'
       uses: azure/login@v1
       with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-  
-    - name: 'Run Azure CLI commands'
-      run: |
-          az account show
-          az group list
-          pwd
 
     - uses: actions/checkout@v3
-    
+
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version-file: './terratest/go.mod'
 
-
-    - name: Test
+    - name: TerraTest
+      working-directory: ./terratest
       run: |
-        cd ./terratest
-        GOPATH=$(pwd)
-        go get
-        go test
+        go test -timeout 30m 
+        # The below sets up terratest log parser and outputs some junit xml 
+        # curl --location --silent --fail --show-error -o terratest_log_parser https://github.com/gruntwork-io/terratest/releases/download/v0.41.16/terratest_log_parser_linux_amd_64
+        # go test -timeout 30m | tee test_output.log 
+        # ./terratest_log_parser -testlog test_output.log -outputdir test_output
