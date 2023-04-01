@@ -1,15 +1,18 @@
 name: Terratest-demo
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+
 on:
   pull_request:
     branches: [ 'main' ]
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
 
 permissions:
       id-token: write # Needed for ODIC/Identity Federation
       contents: read
       
 jobs: 
-  build-and-deploy:
+  Terratest:
     runs-on: ubuntu-latest
     environment: azure-lab 
     steps:
@@ -30,7 +33,7 @@ jobs:
     - name: TerraTest
       working-directory: ./terratest
       run: |
-        go test -timeout 30m 
+        go test -v -timeout 30m 
         # The below sets up terratest log parser and outputs some junit xml 
         # curl --location --silent --fail --show-error -o terratest_log_parser https://github.com/gruntwork-io/terratest/releases/download/v0.41.16/terratest_log_parser_linux_amd_64
         # go test -timeout 30m | tee test_output.log 

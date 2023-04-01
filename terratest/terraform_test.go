@@ -1,6 +1,7 @@
 package test
 
 import (
+	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/retry"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
@@ -8,6 +9,8 @@ import (
 	"testing"
 	"time"
 )
+
+var uniqueId string = random.UniqueId()
 
 func TestEndToEndDeploymentScenario(t *testing.T) {
 	t.Parallel()
@@ -21,6 +24,9 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 			TerraformDir:    fixtureFolder,
 			TerraformBinary: "terraform",
 			MaxRetries:      3,
+			Vars: map[string]interface{}{
+				"guid": uniqueId,
+			},
 		})
 
 		// Save options for later test stages
