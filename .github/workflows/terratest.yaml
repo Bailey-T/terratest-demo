@@ -33,5 +33,6 @@ jobs:
     - name: Test
       run: |
         cd ./terratest
+        GOPATH=$(pwd)
         go get
         go test -v ./terratest/
